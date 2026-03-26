@@ -20,9 +20,9 @@ export const AuthProvider = ({ children }) => {
       .select('space_id, spaces(id, name)')
       .eq('user_id', userId)
       .single() // We expect only one space per user
-    if (error) console.error('fetchSpace:', error.message)
+    if (error) console.error('fetchUserSpace:', error.message)
     // If data exists, set the space — otherwise set null
-    setSpace(data?.spaces ?? null)
+    setSpace(data?.[0]?.spaces ?? null) // Note: data is an array of memberships, we take the first one and get its space, otherwise null
   }
 
   useEffect(() => {
