@@ -5,7 +5,7 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true) // The app is loading until we check if the user is logged in i.e. we pause rendering children until we know if the user is logged in or not
 
   useEffect(() => {
     // Get current session when the app starts
