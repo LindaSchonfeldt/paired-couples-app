@@ -4,8 +4,8 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { Navbar } from './components/Navbar'
 
 // A layout component that includes the Navbar and wraps protected routes
-const ProtectedLayout = ({ children }) => (
-  <ProtectedRoute>
+const ProtectedLayout = ({ children, requireSpace = true }) => (
+  <ProtectedRoute requireSpace={requireSpace}>
     <Navbar />
     {children}
   </ProtectedRoute>
@@ -20,7 +20,7 @@ export const App = () => {
         <Route
           path='/setup'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute requireSpace={false}>
               <SpaceSetup />
             </ProtectedRoute>
           }
@@ -28,7 +28,7 @@ export const App = () => {
         <Route
           path='/'
           element={
-            <ProtectedLayout>
+            <ProtectedLayout requireSpace={false}>
               <Home />
             </ProtectedLayout>
           }
