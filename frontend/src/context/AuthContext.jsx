@@ -5,12 +5,26 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [space, setSpace] = useState(null)
   const [loading, setLoading] = useState(true) // The app is loading until we check if the user is logged in i.e. we pause rendering children until we know if the user is logged in or not
+
+  const fetchUserSpace = async (userId) => {
+    const { data, error } = await supabase
+      .from('space_members')
+      .select('space_id, spaces(id, name)')
+      .eq('user_id', userId)
+      .single()
+    if (error) console.error('fetchSpace:', error.message)
+    setSpace(data?.spaces ?? null)
+  }
 
   useEffect(() => {
     // Get current session when the app starts
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
+      if (session?.user) {
+        fetchUserSpace(session.user.id)
+      }
       setLoading(false)
     })
 
@@ -19,6 +33,11 @@ export const AuthProvider = ({ children }) => {
       data: { subscription }
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
+      if (session?.user) {
+        fetchUserSpace(session.user.id)
+      } else {
+        setSpace(null)
+      }
     })
 
     return () => subscription.unsubscribe()
@@ -26,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     // Only render children when loading is false to prevent flickering
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, space, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   )

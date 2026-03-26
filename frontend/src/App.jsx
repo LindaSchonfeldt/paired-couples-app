@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home, Login, Calendar, Register, Lists } from './pages'
+import { Home, Login, Calendar, Register, Lists, SpaceSetup } from './pages'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { Navbar } from './components/Navbar'
 
@@ -17,6 +17,14 @@ export const App = () => {
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route
+          path='/setup'
+          element={
+            <ProtectedRoute>
+              <SpaceSetup />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path='/'
           element={
