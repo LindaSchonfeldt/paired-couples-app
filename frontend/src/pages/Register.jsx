@@ -12,6 +12,8 @@ export const Register = () => {
       console.error(error.message)
     } else {
       console.log('Konto skapat!')
+      setEmail('')
+      setPassword('')
     }
   }
 
