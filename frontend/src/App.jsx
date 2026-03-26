@@ -1,6 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home, Login, Calendar, Register, Lists } from './pages'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { Navbar } from './components/Navbar'
+
+// A layout component that includes the Navbar and wraps protected routes
+const ProtectedLayout = ({ children }) => (
+  <ProtectedRoute>
+    <Navbar />
+    {children}
+  </ProtectedRoute>
+)
 
 export const App = () => {
   return (
@@ -11,25 +20,25 @@ export const App = () => {
         <Route
           path='/'
           element={
-            <ProtectedRoute>
+            <ProtectedLayout>
               <Home />
-            </ProtectedRoute>
+            </ProtectedLayout>
           }
         />
         <Route
           path='/calendar'
           element={
-            <ProtectedRoute>
+            <ProtectedLayout>
               <Calendar />
-            </ProtectedRoute>
+            </ProtectedLayout>
           }
         />
         <Route
           path='/lists'
           element={
-            <ProtectedRoute>
+            <ProtectedLayout>
               <Lists />
-            </ProtectedRoute>
+            </ProtectedLayout>
           }
         />
       </Routes>
