@@ -11,6 +11,7 @@ export const Register = () => {
     const { error } = await supabase.auth.signUp({ email, password })
     if (error) {
       console.error(error.message)
+      setMessage(error.message)
     } else {
       setMessage('Kolla din email och bekräfta ditt konto!')
       setEmail('')
