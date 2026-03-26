@@ -1,55 +1,69 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../utils/supabase'
 
+// Create a context object that will hold auth data for the entire app
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
+  // Track the logged-in user (null = not logged in)
   const [user, setUser] = useState(null)
+  // Track the space the user belongs to (null = no space yet)
   const [space, setSpace] = useState(null)
-  const [loading, setLoading] = useState(true) // The app is loading until we check if the user is logged in i.e. we pause rendering children until we know if the user is logged in or not
+  // Prevent rendering until we know the auth state, to avoid flickering
+  const [loading, setLoading] = useState(true)
 
+  // Fetch the space that the user is a member of
   const fetchUserSpace = async (userId) => {
     const { data, error } = await supabase
       .from('space_members')
+      // Get the space_id and join the spaces table to get id and name
       .select('space_id, spaces(id, name)')
       .eq('user_id', userId)
-      .single()
+      .single() // We expect only one space per user
     if (error) console.error('fetchSpace:', error.message)
+    // If data exists, set the space — otherwise set null
     setSpace(data?.spaces ?? null)
   }
 
   useEffect(() => {
-    // Get current session when the app starts
+    // Check if there is an active session when the app first loads
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
+      // If a user is logged in, fetch their space
       if (session?.user) {
         fetchUserSpace(session.user.id)
       }
+      // Done loading — allow the app to render
       setLoading(false)
     })
 
-    // Listen for login/logout
+    // Listen for auth changes (login, logout, token refresh)
     const {
       data: { subscription }
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
       if (session?.user) {
+        // User logged in — fetch their space
         fetchUserSpace(session.user.id)
       } else {
+        // User logged out — clear the space
         setSpace(null)
       }
     })
 
+    // Clean up the listener when the component unmounts
     return () => subscription.unsubscribe()
   }, [])
 
   return (
-    // Only render children when loading is false to prevent flickering
+    // Make user, space and loading available to the entire app
+    // Only render children when loading is done to prevent flickering
     <AuthContext.Provider value={{ user, space, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   )
 }
 
+// Custom hook to access auth context from any component
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext)
