@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
       // Get the space_id and join the spaces table to get id and name
       .select('space_id, spaces(id, name)')
       .eq('user_id', userId)
-      .single() // We expect only one space per user
     if (error) console.error('fetchUserSpace:', error.message)
     // If data exists, set the space — otherwise set null
     setSpace(data?.[0]?.spaces ?? null) // Note: data is an array of memberships, we take the first one and get its space, otherwise null
