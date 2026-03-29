@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
   return (
     // Make user, space and loading available to the entire app
     // Only render children when loading is done to prevent flickering
-    <AuthContext.Provider value={{ user, space, loading }}>
+    <AuthContext.Provider value={{ user, space, setSpace, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   )

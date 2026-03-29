@@ -1,5 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home, Login, Calendar, Register, Lists, SpaceSetup } from './pages'
+import {
+  Home,
+  Login,
+  Calendar,
+  Register,
+  Lists,
+  Space,
+  SpaceSetup
+} from './pages'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { Navbar } from './components/Navbar'
 
@@ -30,6 +38,14 @@ export const App = () => {
           element={
             <ProtectedLayout requireSpace={false}>
               <Home />
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path='/space'
+          element={
+            <ProtectedLayout>
+              <Space />
             </ProtectedLayout>
           }
         />
