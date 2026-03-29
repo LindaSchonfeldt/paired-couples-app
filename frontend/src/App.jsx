@@ -42,7 +42,7 @@ export const App = () => {
           }
         />
         <Route
-          path='/space'
+          path='/space/:spaceId'
           element={
             <ProtectedLayout>
               <Space />
