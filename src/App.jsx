@@ -1,15 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+import { Navbar, ProtectedRoute } from './components'
 import {
-  Home,
-  Login,
   Calendar,
-  Register,
+  Home,
   Lists,
+  Login,
+  Register,
   Space,
   SpaceSetup
 } from './pages'
-import { ProtectedRoute } from './components/ProtectedRoute'
-import { Navbar } from './components/Navbar'
 
 // A layout component that includes the Navbar and wraps protected routes
 const ProtectedLayout = ({ children, requireSpace = true }) => (
