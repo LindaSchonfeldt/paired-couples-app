@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(cmd /c \"xcopy /E /I /H /Y \"\"c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\frontend\\\\src\"\" \"\"c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\src\"\"\")",
+      "Bash(powershell -Command \"Copy-Item -Path ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\frontend\\\\src'' -Destination ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\src'' -Recurse -Force\")",
+      "Bash(powershell -Command \":*)",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\frontend''\")",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\backend''\")",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\frontend''; Remove-Item -Recurse -Force ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\backend''\")",
+      "Bash(grep -E \"^\\(react|vite|tailwind\\)$\")"
+    ]
+  }
+}
