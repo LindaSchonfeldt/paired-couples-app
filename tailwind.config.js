@@ -5,20 +5,25 @@ export default {
     extend: {
       colors: {
         brand: {
-          50:  '#f5f5f5',
+          50: '#f5f5f5',
           100: '#e5e5e5',
           500: '#737373', // byt ut mot riktig primärfärg senare
-          900: '#171717',
-        },
+          900: '#171717'
+        }
+      },
+      fontSize: {
+        heading: '24px',
+        body: '16px',
+        small: '12px'
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif']
       },
       borderRadius: {
-        xl:  '1rem',
-        '2xl': '1.5rem',
-      },
-    },
+        xl: '1rem',
+        '2xl': '1.5rem'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }

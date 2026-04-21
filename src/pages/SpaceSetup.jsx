@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { supabase } from '../utils/supabase'
+
+import { Alert, Button, ButtonGroup, Input, PageLayout } from '../components'
 import { useAuth } from '../context/AuthContext'
+import { supabase } from '../utils/supabase'
 
 export const SpaceSetup = () => {
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
+  const [messageType, setMessageType] = useState('error')
   const navigate = useNavigate()
   const { setSpace } = useAuth()
 
@@ -17,6 +20,7 @@ export const SpaceSetup = () => {
     } = await supabase.auth.getUser()
 
     if (!user) {
+      setMessageType('error')
       setMessage('You must be logged in to create a space.')
       return
     }
@@ -29,6 +33,7 @@ export const SpaceSetup = () => {
 
     if (error) {
       console.error(error.message)
+      setMessageType('error')
       setMessage(error.message)
       return
     }
@@ -40,29 +45,35 @@ export const SpaceSetup = () => {
 
     if (memberError) {
       console.error(memberError.message)
+      setMessageType('error')
       setMessage(memberError.message)
       return
     }
 
     setSpace(data)
-    navigate('/space')
+    navigate('/')
   }
 
   return (
-    <div>
-      <h1>Get started</h1>
+    <PageLayout title='Get started'>
       <p>Create a new space or join an existing one.</p>
       <form onSubmit={handleSubmit}>
-        <input
-          type='text'
+        <Input
           placeholder='Space name'
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(value) => setName(value)}
+          status={message ? messageType : undefined}
+          required
         />
-        <button type='submit'>Create space</button>
-        <button type='button'>Join existing space</button>
+
+        <ButtonGroup>
+          <Button type='submit'>Create space</Button>
+          <Button type='button' variant='secondary'>
+            Join existing space
+          </Button>
+        </ButtonGroup>
       </form>
-      {message && <p>{message}</p>}
-    </div>
+      <Alert type={messageType} message={message} />
+    </PageLayout>
   )
 }
