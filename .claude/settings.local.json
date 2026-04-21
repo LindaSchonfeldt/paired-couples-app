@@ -9,7 +9,9 @@
       "Bash(powershell -Command \"Remove-Item -Recurse -Force ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\frontend''\")",
       "Bash(powershell -Command \"Remove-Item -Recurse -Force ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\backend''\")",
       "Bash(powershell -Command \"Remove-Item -Recurse -Force ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\frontend''; Remove-Item -Recurse -Force ''c:\\\\Users\\\\linda\\\\OneDrive\\\\Skrivbord\\\\code-projects\\\\paired-couples-app\\\\backend''\")",
-      "Bash(grep -E \"^\\(react|vite|tailwind\\)$\")"
+      "Bash(grep -E \"^\\(react|vite|tailwind\\)$\")",
+      "Bash(git -C \"/c/Users/linda/OneDrive/Skrivbord/code-projects/paired-couples-app\" status)",
+      "Bash(git -C \"/c/Users/linda/OneDrive/Skrivbord/code-projects/paired-couples-app\" diff)"
     ]
   }
 }

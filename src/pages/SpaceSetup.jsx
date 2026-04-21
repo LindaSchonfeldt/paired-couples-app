@@ -17,7 +17,7 @@ export const SpaceSetup = () => {
     } = await supabase.auth.getUser()
 
     if (!user) {
-      setMessage('Du måste vara inloggad för att skapa ett space.')
+      setMessage('You must be logged in to create a space.')
       return
     }
 
@@ -50,17 +50,17 @@ export const SpaceSetup = () => {
 
   return (
     <div>
-      <h1>Kom igång</h1>
-      <p>Skapa ett nytt space eller gå med i ett befintligt.</p>
+      <h1>Get started</h1>
+      <p>Create a new space or join an existing one.</p>
       <form onSubmit={handleSubmit}>
         <input
           type='text'
-          placeholder='Namn på space'
+          placeholder='Space name'
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <button type='submit'>Skapa space</button>
-        <button type='button'>Gå med i befintligt space</button>
+        <button type='submit'>Create space</button>
+        <button type='button'>Join existing space</button>
       </form>
       {message && <p>{message}</p>}
     </div>

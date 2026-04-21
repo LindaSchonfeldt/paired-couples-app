@@ -13,7 +13,7 @@ export const Register = () => {
       console.error(error.message)
       setMessage(error.message)
     } else {
-      setMessage('Kolla din email och bekräfta ditt konto!')
+      setMessage('Check your email to confirm your account!')
       setEmail('')
       setPassword('')
     }
@@ -21,7 +21,7 @@ export const Register = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Skapa konto</h1>
+      <h1>Create account</h1>
       <input
         type='email'
         placeholder='Email'
@@ -30,11 +30,11 @@ export const Register = () => {
       />
       <input
         type='password'
-        placeholder='Lösenord'
+        placeholder='Password'
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type='submit'>Registrera</button>
+      <button type='submit'>Register</button>
 
       {message && <p>{message}</p>}
     </form>

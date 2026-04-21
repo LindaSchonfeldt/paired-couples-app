@@ -7,9 +7,9 @@ export const Space = () => {
     <div>
       <h1>{space?.name ?? 'Space'}</h1>
       {space ? (
-        <p>Detaljer för ditt space '{space.name}' visas här.</p>
+        <p>Details for your space '{space.name}' will appear here.</p>
       ) : (
-        <p>Du har inget space ännu. Gå till Setup för att skapa ett.</p>
+        <p>You don't have a space yet. Go to Setup to create one.</p>
       )}
     </div>
   )

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { supabase } from '../utils/supabase'
 
 export const Login = () => {
@@ -24,7 +25,7 @@ export const Login = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Logga in</h1>
+      <h1>Log in</h1>
       <input
         type='email'
         placeholder='Email'
@@ -33,11 +34,11 @@ export const Login = () => {
       />
       <input
         type='password'
-        placeholder='Lösenord'
+        placeholder='Password'
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type='submit'>Logga in</button>
+      <button type='submit'>Sign in</button>
 
       {message && <p>{message}</p>}
     </form>
