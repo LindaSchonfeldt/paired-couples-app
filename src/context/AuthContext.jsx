@@ -26,11 +26,11 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Check if there is an active session when the app first loads
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setUser(session?.user ?? null)
       // If a user is logged in, fetch their space
       if (session?.user) {
-        fetchUserSpace(session.user.id)
+        await fetchUserSpace(session.user.id)
       }
       // Done loading — allow the app to render
       setLoading(false)
