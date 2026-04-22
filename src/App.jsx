@@ -2,12 +2,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Navbar, ProtectedRoute } from './components'
 import {
-  Calendar,
+  Calendars,
+  CreateList,
   Home,
   Lists,
   Login,
   Register,
   Space,
+  Spaces,
   SpaceSetup
 } from './pages'
 
@@ -50,10 +52,10 @@ export const App = () => {
           }
         />
         <Route
-          path='/calendar'
+          path='/calendars'
           element={
             <ProtectedLayout>
-              <Calendar />
+              <Calendars />
             </ProtectedLayout>
           }
         />
@@ -62,6 +64,22 @@ export const App = () => {
           element={
             <ProtectedLayout>
               <Lists />
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path='/lists/new'
+          element={
+            <ProtectedLayout>
+              <CreateList />
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path='/spaces'
+          element={
+            <ProtectedLayout>
+              <Spaces />
             </ProtectedLayout>
           }
         />

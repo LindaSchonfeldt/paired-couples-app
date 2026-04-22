@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../utils/supabase'
+import { Button, PageLayout } from '../components'
+import { MdDelete, MdModeEditOutline } from 'react-icons/md'
 
 export const Lists = () => {
   const { space } = useAuth()
   const [lists, setLists] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!space) return
@@ -28,13 +32,21 @@ export const Lists = () => {
   }, [space])
 
   return (
-    <div>
-      <h1>Lists</h1>
+    <PageLayout title='Lists'>
       {lists.map((list) => (
-        <p key={list.id}>
-          {list.name} ({list.type})
-        </p>
+        <div key={list.id}>
+          <p>
+            {list.name} ({list.type})
+          </p>
+          <Button variant='danger' size='sm'>
+            <MdDelete />
+          </Button>
+          <Button variant='primary' size='sm'>
+            <MdModeEditOutline />
+          </Button>
+        </div>
       ))}
-    </div>
+      <Button onPress={() => navigate('/lists/new')}>Create list</Button>
+    </PageLayout>
   )
 }

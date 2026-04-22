@@ -3,7 +3,7 @@ type Variant = 'primary' | 'secondary' | 'ghost'
 type Props = {
   variant?: Variant
   children: React.ReactNode
-  onClick: () => void
+  onPress?: () => void
   type?: 'button' | 'submit'
 }
 
@@ -16,11 +16,11 @@ const styles: Record<Variant, string> = {
 export const Button = ({
   variant = 'primary',
   children,
-  onClick,
+  onPress,
   type = 'button'
 }: Props) => {
   return (
-    <button type={type} onClick={onClick} className={styles[variant]}>
+    <button type={type} onClick={onPress} className={styles[variant]}>
       {children}
     </button>
   )

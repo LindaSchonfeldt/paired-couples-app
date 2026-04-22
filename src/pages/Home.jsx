@@ -1,3 +1,7 @@
+import { PageLayout } from '../components'
+
 export const Home = () => {
-  return <h1>Hem</h1>
+  return <PageLayout title='Home'></PageLayout>
+
+  // TODO: Show recent activity here, e.g. upcoming events, recent list updates, etc.
 }

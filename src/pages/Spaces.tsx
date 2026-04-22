@@ -1,8 +1,10 @@
+import { PageLayout } from '../components'
+
 export const Spaces = () => {
   return (
-    <div>
-      <h1>Spaces</h1>
+    <PageLayout title='Spaces'>
       <p>Below you can see which Spaces you belong to.</p>
-    </div>
+      {/* TODO: List spaces here with links to each space page */}
+    </PageLayout>
   )
 }
