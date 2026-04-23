@@ -46,7 +46,7 @@ export const App = () => {
         <Route
           path='/space/:spaceId'
           element={
-            <ProtectedLayout>
+            <ProtectedLayout requireSpace={true}>
               <Space />
             </ProtectedLayout>
           }
@@ -54,7 +54,7 @@ export const App = () => {
         <Route
           path='/calendars'
           element={
-            <ProtectedLayout>
+            <ProtectedLayout requireSpace={true}>
               <Calendars />
             </ProtectedLayout>
           }
@@ -62,7 +62,7 @@ export const App = () => {
         <Route
           path='/lists'
           element={
-            <ProtectedLayout>
+            <ProtectedLayout requireSpace={true}>
               <Lists />
             </ProtectedLayout>
           }
@@ -70,7 +70,7 @@ export const App = () => {
         <Route
           path='/lists/new'
           element={
-            <ProtectedLayout>
+            <ProtectedLayout requireSpace={true}>
               <CreateList />
             </ProtectedLayout>
           }
@@ -78,8 +78,16 @@ export const App = () => {
         <Route
           path='/spaces'
           element={
-            <ProtectedLayout>
+            <ProtectedLayout requireSpace={true}>
               <Spaces />
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path='/create-space'
+          element={
+            <ProtectedLayout requireSpace={false}>
+              <SpaceSetup />
             </ProtectedLayout>
           }
         />

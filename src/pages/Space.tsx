@@ -1,20 +1,36 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-import { PageLayout } from '../components'
+import {
+  PageLayout,
+  SpaceListSection,
+  SpaceMemberList,
+  SpaceCalendarSection
+} from '../components'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../utils/supabase'
 
 type Member = {
   user_id: string
-  profiles: {
-    display_name: string | null
-  }[] | null
+  profiles:
+    | {
+        display_name: string | null
+      }[]
+    | null
+}
+
+type List = {
+  id: number
+  name: string
+  type: string
 }
 
 export const Space = () => {
   const { space } = useAuth()
   const [members, setMembers] = useState<Member[]>([])
+  const { spaceId } = useParams()
+  const [lists, setLists] = useState<List[]>([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!space) return
@@ -34,20 +50,36 @@ export const Space = () => {
     }
 
     fetchMembers()
-  }, [space])
+
+    const fetchLists = async () => {
+      const { data, error } = await supabase
+        .from('lists')
+        .select('id, name, type')
+        .eq('space_id', spaceId)
+
+      if (error) {
+        console.error(error.message)
+        return
+      }
+
+      setLists(data)
+    }
+
+    fetchLists()
+  }, [space?.id, spaceId])
 
   return (
     <PageLayout title={space?.name ?? 'Space'}>
-      <h2 className='text-sm font-medium text-brand-500 mb-2'>Members</h2>
-      {members.map((member) => (
-        <p key={member.user_id}>{member.profiles?.[0]?.display_name ?? 'Unknown'}</p>
-      ))}
+      <SpaceMemberList
+        members={members}
+        onInvite={() => navigate(`/space/${spaceId}/invite`)}
+      />
 
-      <h2 className='text-sm font-medium text-brand-500 mt-6 mb-2'>
-        Quick links
-      </h2>
-      <Link to='/lists'>Lists</Link>
-      <Link to='/calendar'>Calendar</Link>
+      <SpaceCalendarSection
+        onLinkCalendar={() => navigate(`/space/${spaceId}/calendar`)}
+      />
+
+      <SpaceListSection lists={lists} spaceId={spaceId ?? ''} />
     </PageLayout>
   )
 }
