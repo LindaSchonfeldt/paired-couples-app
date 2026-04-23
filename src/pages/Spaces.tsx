@@ -37,7 +37,7 @@ export const Spaces = () => {
     }
 
     fetchSpaces()
-  }, [user])
+  }, [user?.id])
 
   return (
     <PageLayout title='Spaces'>

@@ -46,7 +46,10 @@ export const Space = () => {
         return
       }
 
-      setMembers(data)
+      const unique = data.filter(
+        (m, i, self) => self.findIndex(x => x.user_id === m.user_id) === i
+      )
+      setMembers(unique)
     }
 
     fetchMembers()
@@ -62,7 +65,10 @@ export const Space = () => {
         return
       }
 
-      setLists(data)
+      const unique = data.filter(
+        (l, i, self) => self.findIndex(x => x.id === l.id) === i
+      )
+      setLists(unique)
     }
 
     fetchLists()
