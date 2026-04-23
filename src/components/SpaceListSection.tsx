@@ -23,9 +23,14 @@ export const SpaceListSection = ({ lists, spaceId }: Props) => {
         <p className='text-sm text-brand-500'>No lists yet.</p>
       ) : (
         lists.map((list) => (
-          <p key={list.id}>
-            {list.name} ({list.type})
-          </p>
+          <button
+            key={list.id}
+            onClick={() => navigate(`/lists/${list.id}`)}
+            className='w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-100 text-sm text-neutral-800'
+          >
+            {list.name}
+            <span className='ml-2 text-xs text-neutral-400'>{list.type}</span>
+          </button>
         ))
       )}
       <Button
