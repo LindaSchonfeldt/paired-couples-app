@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Navbar, ProtectedRoute } from './components'
 import {
+  AcceptInvite,
   Calendars,
   CreateList,
   Home,
@@ -10,7 +11,8 @@ import {
   Register,
   Space,
   Spaces,
-  SpaceSetup
+  SpaceSetup,
+  Invite
 } from './pages'
 
 // A layout component that includes the Navbar and wraps protected routes
@@ -91,6 +93,15 @@ export const App = () => {
             </ProtectedLayout>
           }
         />
+        <Route
+          path='/space/:spaceId/invite'
+          element={
+            <ProtectedLayout>
+              <Invite />
+            </ProtectedLayout>
+          }
+        />
+        <Route path='/invite/:token' element={<AcceptInvite />} />
       </Routes>
     </BrowserRouter>
   )
