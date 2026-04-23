@@ -10,6 +10,7 @@ export const CreateList = () => {
   const navigate = useNavigate()
   const [name, setName] = useState('')
   const [type, setType] = useState('shopping')
+  const [isShared, setIsShared] = useState(true)
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState<
     'error' | 'success' | 'info' | 'warning'
@@ -20,7 +21,7 @@ export const CreateList = () => {
 
     const { error } = await supabase
       .from('lists')
-      .insert({ name, type, space_id: space.id, created_by: user.id })
+      .insert({ name, type, is_shared: isShared, space_id: space.id, created_by: user.id })
 
     if (error) {
       setMessageType('error')
@@ -45,6 +46,20 @@ export const CreateList = () => {
           <option value='shopping'>Shopping</option>
           <option value='todo'>To-do</option>
         </select>
+
+        <div className='flex items-center gap-3 my-4'>
+          <input
+            type='checkbox'
+            id='isShared'
+            checked={isShared}
+            onChange={(e) => setIsShared(e.target.checked)}
+            className='w-4 h-4 accent-brand-500'
+          />
+          <label htmlFor='isShared' className='text-sm text-neutral-700'>
+            Shared — everyone in the space can check off items
+          </label>
+        </div>
+
         <Button type='submit'>Create</Button>
       </form>
       <Alert type={messageType} message={message} />

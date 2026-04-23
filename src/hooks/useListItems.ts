@@ -7,6 +7,8 @@ type ListItem = {
   id: number
   title: string
   is_done: boolean
+  created_by: string
+  profiles: { display_name: string | null } | null
 }
 
 export const useListItems = (listId: string | undefined) => {
@@ -19,7 +21,7 @@ export const useListItems = (listId: string | undefined) => {
     const fetchItems = async () => {
       const { data, error } = await supabase
         .from('list_items')
-        .select('id, title, is_done')
+        .select('id, title, is_done, created_by, profiles(display_name)')
         .eq('list_id', listId)
 
       if (error) {
@@ -27,7 +29,7 @@ export const useListItems = (listId: string | undefined) => {
         return
       }
 
-      setItems(data)
+      setItems(data as unknown as ListItem[])
     }
 
     fetchItems()
@@ -39,7 +41,7 @@ export const useListItems = (listId: string | undefined) => {
     const { data, error } = await supabase
       .from('list_items')
       .insert({ list_id: Number(listId), title: title.trim(), is_done: false, created_by: user?.id })
-      .select('id, title, is_done')
+      .select('id, title, is_done, created_by, profiles(display_name)')
       .single()
 
     if (error) {
@@ -47,7 +49,7 @@ export const useListItems = (listId: string | undefined) => {
       return
     }
 
-    setItems((prev) => [...prev, data])
+    setItems((prev) => [...prev, data as unknown as ListItem])
   }
 
   const toggleItem = async (item: ListItem) => {
