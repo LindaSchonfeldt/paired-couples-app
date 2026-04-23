@@ -12,11 +12,7 @@ import { supabase } from '../utils/supabase'
 
 type Member = {
   user_id: string
-  profiles:
-    | {
-        display_name: string | null
-      }[]
-    | null
+  profiles: { display_name: string | null } | null
 }
 
 type List = {
@@ -49,7 +45,7 @@ export const Space = () => {
       const unique = data.filter(
         (m, i, self) => self.findIndex(x => x.user_id === m.user_id) === i
       )
-      setMembers(unique)
+      setMembers(unique as unknown as Member[])
     }
 
     fetchMembers()

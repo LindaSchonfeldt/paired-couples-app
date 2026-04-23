@@ -98,14 +98,12 @@ export const ListDetail = () => {
                   className='w-4 h-4 accent-brand-500'
                 />
               )}
-              <div>
-                <span className={`text-sm ${item.is_done ? 'line-through text-neutral-400' : 'text-neutral-800'}`}>
-                  {item.title}
-                </span>
-                <p className='text-xs text-neutral-400'>
-                  {item.profiles?.display_name ?? 'Unknown'}
-                </p>
-              </div>
+              <span className={`text-sm ${item.is_done ? 'line-through text-neutral-400' : 'text-neutral-800'}`}>
+                {item.title}
+              </span>
+              <span className='text-xs text-neutral-400'>
+                {item.profiles?.display_name ?? 'Unknown'}
+              </span>
             </li>
           ))}
         </ul>
