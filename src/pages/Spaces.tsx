@@ -33,7 +33,10 @@ export const Spaces = () => {
         .map((row) => row.spaces as unknown as Space)
         .filter((s): s is Space => s !== null && s !== undefined)
 
-      setSpaces(result)
+      const unique = result.filter(
+        (s, i, self) => self.findIndex(x => x.id === s.id) === i
+      )
+      setSpaces(unique)
     }
 
     fetchSpaces()
