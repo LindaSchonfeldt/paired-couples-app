@@ -53,7 +53,10 @@ export const ListDetail = () => {
   })
 
   const handleAdd = async () => {
-    const titles = newItem.split(',').map((t) => t.trim()).filter(Boolean)
+    const titles = newItem
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean)
     for (const title of titles) {
       await addItem(title)
     }
@@ -68,17 +71,25 @@ export const ListDetail = () => {
           value={newItem}
           onChange={setNewItem}
         />
-        <Button variant='primary' onPress={handleAdd}>
+        <Button variant='primary' size='sm' onPress={handleAdd}>
           Add
         </Button>
       </div>
 
       {items.length > 0 && (
         <div className='flex gap-2 mb-4'>
-          <Button variant={sortBy === 'title' ? 'primary' : 'ghost'} onPress={() => setSortBy('title')}>
+          <Button
+            variant={sortBy === 'title' ? 'primary' : 'ghost'}
+            size='sm'
+            onPress={() => setSortBy('title')}
+          >
             Name
           </Button>
-          <Button variant={sortBy === 'user' ? 'primary' : 'ghost'} onPress={() => setSortBy('user')}>
+          <Button
+            variant={sortBy === 'user' ? 'primary' : 'ghost'}
+            size='sm'
+            onPress={() => setSortBy('user')}
+          >
             User
           </Button>
         </div>
@@ -98,7 +109,9 @@ export const ListDetail = () => {
                   className='w-4 h-4 accent-brand-500'
                 />
               )}
-              <span className={`text-sm ${item.is_done ? 'line-through text-neutral-400' : 'text-neutral-800'}`}>
+              <span
+                className={`text-sm ${item.is_done ? 'line-through text-neutral-400' : 'text-neutral-800'}`}
+              >
                 {item.title}
               </span>
               <span className='text-xs text-neutral-400'>
