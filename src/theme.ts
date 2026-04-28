@@ -6,7 +6,7 @@ export const colors = {
 }
 export const fontSize = {
   heading: 24,
-  bodyLg: 18,
+  title: 18,
   body: 16,
-  bodySm: 12
+  caption: 12
 }

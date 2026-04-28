@@ -10,9 +10,9 @@ type Props = {
 }
 
 const sizes: Record<Size, string> = {
-  sm: 'px-2 py-1 text-bodySm',
+  sm: 'px-2 py-1 text-caption',
   md: 'px-4 py-2 text-body',
-  lg: 'px-8 py-4 text-bodyLg'
+  lg: 'px-8 py-4 text-title'
 }
 
 const styles: Record<Variant, string> = {

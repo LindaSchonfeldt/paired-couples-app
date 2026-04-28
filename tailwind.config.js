@@ -13,8 +13,9 @@ export default {
       },
       fontSize: {
         heading: '24px',
+        title: '18px',
         body: '16px',
-        small: '12px'
+        caption: '12px'
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif']
