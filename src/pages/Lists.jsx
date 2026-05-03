@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
+import { MdDelete, MdModeEditOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 
+import { Button, PageLayout } from '../components'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../utils/supabase'
-import { Button, PageLayout } from '../components'
-import { MdDelete, MdModeEditOutline } from 'react-icons/md'
 
 export const Lists = () => {
   const { space } = useAuth()
@@ -34,16 +34,15 @@ export const Lists = () => {
   return (
     <PageLayout title='Lists'>
       {lists.map((list) => (
-        <div key={list.id}>
-          <p>
+        <div key={list.id} className='flex items-center justify-between'>
+          <Button variant='ghost' onPress={() => navigate(`/lists/${list.id}`)}>
             {list.name} ({list.type})
-          </p>
-          <Button variant='danger' size='sm'>
-            <MdDelete />
           </Button>
-          <Button variant='primary' size='sm'>
-            <MdModeEditOutline />
-          </Button>
+          <div className='flex gap-2'>
+            <Button variant='danger' size='sm'>
+              <MdDelete />
+            </Button>
+          </div>
         </div>
       ))}
       <Button onPress={() => navigate('/lists/new')}>Create list</Button>

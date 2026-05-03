@@ -16,9 +16,9 @@ const sizes: Record<Size, string> = {
 }
 
 const styles: Record<Variant, string> = {
-  primary: 'bg-brand-900 text-white px-4 py-2 rounded-2xl font-medium',
-  secondary: 'bg-brand-100 text-brand-900 px-4 py-2 rounded-2xl font-medium',
-  ghost: 'text-brand-500 px-4 py-2 font-medium'
+  primary: 'bg-brand-900 text-white px-4 py-2 rounded-2xl',
+  secondary: 'bg-brand-100 text-brand-900 px-4 py-2 rounded-2xl',
+  ghost: 'text-brand-500 px-4 py-2'
 }
 
 export const Button = ({
