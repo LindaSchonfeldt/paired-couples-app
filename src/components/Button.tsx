@@ -7,6 +7,7 @@ type Props = {
   children: React.ReactNode
   onPress?: () => void
   type?: 'button' | 'submit'
+  disabled?: boolean
 }
 
 const sizes: Record<Size, string> = {
@@ -27,13 +28,15 @@ export const Button = ({
   size = 'md',
   children,
   onPress,
-  type = 'button'
+  type = 'button',
+  disabled = false
 }: Props) => {
   return (
     <button
       type={type}
       onClick={onPress}
-      className={`${styles[variant]} ${sizes[size]}`}
+      disabled={disabled}
+      className={`${styles[variant]} ${sizes[size]} disabled:bg-gray-200 disabled:cursor-not-allowed`}
     >
       {children}
     </button>

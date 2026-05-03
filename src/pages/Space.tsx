@@ -18,7 +18,6 @@ type Member = {
 type List = {
   id: number
   name: string
-  type: string
 }
 
 export const Space = () => {
@@ -43,7 +42,7 @@ export const Space = () => {
       }
 
       const unique = data.filter(
-        (m, i, self) => self.findIndex(x => x.user_id === m.user_id) === i
+        (m, i, self) => self.findIndex((x) => x.user_id === m.user_id) === i
       )
       setMembers(unique as unknown as Member[])
     }
@@ -53,7 +52,7 @@ export const Space = () => {
     const fetchLists = async () => {
       const { data, error } = await supabase
         .from('lists')
-        .select('id, name, type')
+        .select('id, name')
         .eq('space_id', spaceId)
 
       if (error) {
@@ -62,7 +61,7 @@ export const Space = () => {
       }
 
       const unique = data.filter(
-        (l, i, self) => self.findIndex(x => x.id === l.id) === i
+        (l, i, self) => self.findIndex((x) => x.id === l.id) === i
       )
       setLists(unique)
     }
