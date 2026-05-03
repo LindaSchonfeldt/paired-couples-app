@@ -42,7 +42,8 @@ npm run dev
 - Auth (register, login, sign out)
 - Spaces — shared rooms scoped by `space_id`
 - Space members with invite links
-- Lists (shopping, to-do, and more)
+- Lists with composable components — mix todo items and free text in the same list, with optional deadline
+- List management — creators can delete individual items or the entire list
 
 ## Project Structure
 

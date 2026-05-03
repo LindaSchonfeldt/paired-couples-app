@@ -36,13 +36,8 @@ export const Lists = () => {
       {lists.map((list) => (
         <div key={list.id} className='flex items-center justify-between'>
           <Button variant='ghost' onPress={() => navigate(`/lists/${list.id}`)}>
-            {list.name} ({list.type})
+            {list.name}
           </Button>
-          <div className='flex gap-2'>
-            <Button variant='danger' size='sm'>
-              <MdDelete />
-            </Button>
-          </div>
         </div>
       ))}
       <Button onPress={() => navigate('/lists/new')}>Create list</Button>

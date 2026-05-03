@@ -6,14 +6,15 @@ import {
   Calendars,
   CreateList,
   Home,
+  Invite,
+  ListDetail,
+  ListManage,
   Lists,
   Login,
   Register,
   Space,
   Spaces,
-  SpaceSetup,
-  Invite,
-  ListDetail
+  SpaceSetup
 } from './pages'
 
 // A layout component that includes the Navbar and wraps protected routes
@@ -107,6 +108,14 @@ export const App = () => {
           element={
             <ProtectedLayout requireSpace={true}>
               <ListDetail />
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path='/lists/:listId/manage'
+          element={
+            <ProtectedLayout requireSpace={true}>
+              <ListManage />
             </ProtectedLayout>
           }
         />

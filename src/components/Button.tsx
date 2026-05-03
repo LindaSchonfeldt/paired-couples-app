@@ -1,4 +1,4 @@
-type Variant = 'primary' | 'secondary' | 'ghost'
+type Variant = 'primary' | 'secondary' | 'ghost' | 'danger'
 type Size = 'sm' | 'md' | 'lg'
 
 type Props = {
@@ -18,7 +18,8 @@ const sizes: Record<Size, string> = {
 const styles: Record<Variant, string> = {
   primary: 'bg-brand-900 text-white px-4 py-2 rounded-2xl',
   secondary: 'bg-brand-100 text-brand-900 px-4 py-2 rounded-2xl',
-  ghost: 'text-brand-500 px-4 py-2'
+  ghost: 'text-brand-500 px-4 py-2',
+  danger: 'bg-red-500 text-white px-4 py-2 rounded-2xl'
 }
 
 export const Button = ({

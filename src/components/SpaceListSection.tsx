@@ -5,7 +5,6 @@ import { Button } from './Button'
 type List = {
   id: number
   name: string
-  type: string
 }
 
 type Props = {
@@ -29,7 +28,6 @@ export const SpaceListSection = ({ lists, spaceId }: Props) => {
             className='w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-100 text-sm text-neutral-800'
           >
             {list.name}
-            <span className='ml-2 text-xs text-neutral-400'>{list.type}</span>
           </button>
         ))
       )}

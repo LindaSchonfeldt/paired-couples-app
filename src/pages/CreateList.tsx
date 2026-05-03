@@ -9,7 +9,6 @@ export const CreateList = () => {
   const { space, user } = useAuth()
   const navigate = useNavigate()
   const [name, setName] = useState('')
-  const [type, setType] = useState('shopping')
   const [isShared, setIsShared] = useState(true)
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState<
@@ -19,9 +18,16 @@ export const CreateList = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('lists')
-      .insert({ name, type, is_shared: isShared, space_id: space.id, created_by: user.id })
+      .insert({
+        name,
+        is_shared: isShared,
+        space_id: space.id,
+        created_by: user.id
+      })
+      .select('id')
+      .single()
 
     if (error) {
       setMessageType('error')
@@ -29,7 +35,7 @@ export const CreateList = () => {
       return
     }
 
-    navigate('/lists')
+    navigate(`/lists/${data.id}`)
   }
 
   return (
@@ -42,10 +48,6 @@ export const CreateList = () => {
           status={message ? 'error' : undefined}
           required
         />
-        <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value='shopping'>Shopping</option>
-          <option value='todo'>To-do</option>
-        </select>
 
         <div className='flex items-center gap-3 my-4'>
           <input
@@ -56,7 +58,7 @@ export const CreateList = () => {
             className='w-4 h-4 accent-brand-500'
           />
           <label htmlFor='isShared' className='text-sm text-neutral-700'>
-            Shared — everyone in the space can check off items
+            Shared — everyone in the space can alter it
           </label>
         </div>
 
