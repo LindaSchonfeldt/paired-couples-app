@@ -1,17 +1,21 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Alert, Button, Input, PageLayout } from '../components'
 import { supabase } from '../utils/supabase'
 
 export const Register = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState('error')
+  const [accountExists, setAccountExists] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setAccountExists(false)
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -25,6 +29,7 @@ export const Register = () => {
       console.error(error.message)
       setMessageType('error')
       setMessage(error.message)
+      setAccountExists(error.message.toLowerCase().includes('already registered'))
       return
     }
 
@@ -64,6 +69,11 @@ export const Register = () => {
         <Button type='submit'>Register</Button>
       </form>
       <Alert type={messageType} message={message} />
+      {accountExists && (
+        <Button variant='secondary' onPress={() => navigate('/login')}>
+          Log in instead
+        </Button>
+      )}
     </PageLayout>
   )
 }
